@@ -44,7 +44,7 @@ void Person::changeString(const char* string) {		// usuniecie starej tablicy i s
 	fullName[size] = 0;
 }
 void display(const Person& string) {
-	Person copy = string;
+	//Person copy = string;
 	cout << string << endl;
 }
 int main()
