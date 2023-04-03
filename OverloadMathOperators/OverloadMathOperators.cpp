@@ -17,6 +17,8 @@ public:
 	Math operator/(const Math& number) const;
 	Math operator=(const Math& number);
 	friend ostream& operator<<(std::ostream& out, const Math& number);
+	bool operator==(const Math& number) const;
+	bool operator!=(const Math& number) const;
 
 	void display()const;
 };
@@ -57,8 +59,12 @@ ostream& operator<<(std::ostream& stream, const Math & number) {
 	stream << number.x << ", " << number.y << endl;
 	return stream;
 }
-
-
+bool Math::operator==(const Math& number) const {
+	return x == number.x && y == number.y;
+}
+bool Math::operator!=(const Math& number) const {
+	return !(*this == number);
+}
 void Math::display() const {
 	cout << x << ", ";
 	cout << y << endl;
@@ -68,14 +74,18 @@ int main()
 {
 	Math first(2, 3);
 	Math second(4, 6);
+	Math third(2, 4);
 
 	Math total;
 	//total = first + second;
 	//total = first * second;
 	//total = first - second;
 	total = first / second;
-	cout << total << endl;
+	if (first != third) {
+		cout << total << endl;
+	}
 	//total.display();
+
 
 	return 0;
 }
