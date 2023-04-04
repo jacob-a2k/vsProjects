@@ -52,6 +52,7 @@ Math Math::operator/(const Math& number) const {
 }
 Math Math::operator=(const Math& number) {
 	cout << "Overload operator= execute!" << endl;
+	//if (this == &number) return *this;		// dont have dynamic allocation
 	return Math(this->x = number.x, this->y = number.y);
 }
 ostream& operator<<(std::ostream& stream, const Math & number) {
