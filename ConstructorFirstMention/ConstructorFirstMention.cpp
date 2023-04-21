@@ -1,4 +1,5 @@
 #include <iostream>
+#include <string>
 
 class numer {
 	int liczba;
@@ -15,8 +16,12 @@ public:
 	void melduj() {
 		std::cout << nazwa << liczba << std::endl;
 	}
+	void zmianaKomunikatu(const char* NowyOpis) {
+		strcpy_s(nazwa, NowyOpis);
+	}
 };
 numer::numer(int l, const char* opis) {
+	std::cout << "Konstruktor pracuje!" << std::endl;
 	liczba = l;
 	strcpy_s(nazwa, opis);
 }
@@ -37,4 +42,7 @@ int main()
 
 	//cisnienie  spada
 	atmosfera.schowaj(919);
+
+	samolot.zmianaKomunikatu("He,He,He wlasnie spadamy z wysokosc ");
+	samolot.melduj();
 }
