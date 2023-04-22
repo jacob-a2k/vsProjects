@@ -1,8 +1,14 @@
 #include <iostream>
 #include <string>
 
-class kwadrat;
-
+class punkt;
+class kwadrat {
+	int x, y, bok;
+	char nazwa[30];
+public:
+	kwadrat(int a, int b, int dd, const char* opis);
+	int sedzia(punkt& p, int ile);
+};
 class punkt {
 	int x, y;
 	char nazwa[30];
@@ -12,14 +18,7 @@ public:
 		x += n;
 		y += m;
 	}
-	friend int sedzia(punkt& p, kwadrat& k, int ile);
-};
-class kwadrat {
-	int x, y, bok;
-	char nazwa[30];
-public:
-	kwadrat(int a, int b, int dd, const char* opis);
-	friend int sedzia(punkt& p, kwadrat& k, int ile);
+	friend int kwadrat::sedzia(punkt& p, int ile);
 };
 punkt::punkt(int a, int b, const char* opis) {
 	x = a;
@@ -32,14 +31,14 @@ kwadrat::kwadrat(int a, int b, int dd, const char* opis) {
 	bok = dd;
 	strcpy_s(nazwa, opis);
 }
-int sedzia(punkt& pt, kwadrat& kw, int ile) {
-	if ((pt.x >= kw.x) && (pt.x <= (kw.x + kw.bok)) &&
-		(pt.y >= kw.y) && (pt.y <= (kw.y + kw.bok))) {
-		std::cout << pt.nazwa << " lezy na tle " << kw.nazwa << std::endl;
+int kwadrat::sedzia(punkt& pt, int ile) {
+	if ((pt.x >= x) && (pt.x <= (x + bok)) &&
+		(pt.y >= this->y) && (pt.y <= (this->y + this->bok))) {
+		std::cout << pt.nazwa << " lezy na tle " << nazwa << std::endl;
 		return 1;
 	}
 	else {
-		std::cout << "AUT! " << pt.nazwa << " jest na zewnatrz " << kw.nazwa << std::endl;
+		std::cout << "AUT! " << pt.nazwa << " jest na zewnatrz " << nazwa << std::endl;
 		std::cout << "Kolapismy ja " << ile << " razy" << std::endl;
 		return 0;
 	}
@@ -52,10 +51,10 @@ int main()
 	punkt pi(20, 20, "pilka");
 
 	int ile = 0;
-	sedzia(pi, bo,ile);
+	bo.sedzia(pi,ile);
 	std::cout << "kopiemy pilke!\n";
 
-	while (sedzia(pi, bo, ile)) {
+	while (bo.sedzia(pi, ile)) {
 		pi.ruch(losuj(), losuj());
 		ile++;
 	}
