@@ -10,6 +10,7 @@ public:
 	stacje_metra2(float kk, int gg, const char* nn, const char* pp = "");
 	stacje_metra2();
 	void gdzie_jestesmy();
+	void zmianaNazwyStacji(const char* nowaNazwa);
 };
 stacje_metra2::stacje_metra2(float kk, int gg, const char* nn, const char* pp) : km(kk), glebokosc(gg) {
 	strcpy_s(nazwa, nn);
@@ -27,6 +28,9 @@ void stacje_metra2::gdzie_jestesmy() {
 		std::cout << "\tPrzesiadki: " << przesiadki << std::endl;
 	}
 }
+void stacje_metra2::zmianaNazwyStacji(const char* nowaNazwa) {
+	strcpy_s(nazwa, nowaNazwa);
+}
 int main() {
 	stacje_metra2 ostatnia = stacje_metra2(22, 0, "Wansee", "118 Bus");
 	ostatnia.gdzie_jestesmy();
@@ -40,6 +44,11 @@ int main() {
 		stacje_metra2(5.7, 4, "Tier..."),
 		stacje_metra2(8, 4, "ZOO", "Linie U1 i U9")
 	};
+	std::cout << "Stacja druga jest odnawiana. Podaj nowa nazwe: ";
+	char nazwa[20];
+	std::cin >> nazwa;
+	przystanek[1].zmianaNazwyStacji(nazwa);
+
 	for (int i = 0; i < ile_stacji; i++) {
 		przystanek[i].gdzie_jestesmy();
 	}
